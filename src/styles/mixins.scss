@@ -1,0 +1,79 @@
+@import "./vars";
+
+@mixin container {
+  max-width: $laptop;
+  padding: 0 .75rem;
+  margin: 0 auto;
+}
+
+@mixin breakpoint-to($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+
+  label {
+    @include label;
+  }
+
+  input:not([type="checkbox"]) {
+    @include input;
+  }
+
+  button {
+    @include button;
+  }
+
+  a {
+    @include link;
+  }
+
+  @include breakpoint-to($tablet) {
+    width: 100%;
+  }
+}
+
+@mixin label {
+  display: flex;
+  align-items: center;
+  margin: .25rem 0;
+  span {
+    margin-right: .5rem;
+    width: 20%;
+  }
+}
+
+@mixin input {
+  width: 80%;
+  border-radius: 20px;
+  border: 1px solid #999;
+  padding: 5px 15px;
+}
+
+@mixin button {
+  background: $button-background-color;
+  color: $white;
+  border: none;
+  align-self: center;
+  padding: .5rem 3rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+@mixin link {
+  font-size: 14px;
+  color: $blue;
+  margin-right: .5rem;
+}
+
+@mixin error {
+  color: $error-color;
+  margin-bottom: 0;
+}

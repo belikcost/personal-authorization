@@ -1,6 +1,8 @@
 import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
 
+import './Personal.scss';
+
 
 export const Personal = ({user, handleGetUserRequest, handleLogout}) => {
 
@@ -12,11 +14,12 @@ export const Personal = ({user, handleGetUserRequest, handleLogout}) => {
 
     if (user) {
         return (
-            <div>
+            <div className="personal">
+                <h2>Личный кабинет</h2>
                 {user.id ? (
                     <>
                         <p>Здравствуйте, {user.firstName}!</p>
-                        <span onClick={handleLogout}>Выход</span>
+                        <span className="personal__logout" onClick={handleLogout}>Выход</span>
                     </>
                 ) : (
                     <p>Загрузка...</p>

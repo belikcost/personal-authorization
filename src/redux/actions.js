@@ -1,4 +1,5 @@
 import {
+    CLEAR_ERRORS,
     END_PASSWORD_RECOVERY_FAIL,
     END_PASSWORD_RECOVERY_REQUEST,
     END_PASSWORD_RECOVERY_SUCCESS,
@@ -40,3 +41,5 @@ export const endPasswordRecoveryFail = (data) => ({type: END_PASSWORD_RECOVERY_F
 export const endPasswordRecoverySuccess = (data) => ({type: END_PASSWORD_RECOVERY_SUCCESS, payload: data});
 
 export const logout = () => ({type: LOGOUT});
+
+export const clearErrors = () => ({type: CLEAR_ERRORS});

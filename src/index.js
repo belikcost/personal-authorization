@@ -7,6 +7,8 @@ import store from "./redux/store";
 
 import App from './containers/App';
 
+import './index.scss';
+
 
 ReactDOM.render(
   <Router>

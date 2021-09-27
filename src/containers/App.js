@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
+    clearErrors,
     endPasswordRecoveryRequest,
     getUserRequest,
     loginRequest, logout,
@@ -27,7 +28,8 @@ const App = ({
                  handleSetToken,
                  handleStartPasswordRecoveryRequest,
                  handleEndPasswordRecoveryRequest,
-                 handleLogout
+                 handleLogout,
+                 handleClearErrors
              }) => {
 
     useEffect(() => {
@@ -51,6 +53,7 @@ const App = ({
                     user={user}
                     errors={errors}
                     handleLoginRequest={handleLoginRequest}
+                    handleClearErrors={handleClearErrors}
                 />
             </Route>
             <Route path="/register">
@@ -58,6 +61,7 @@ const App = ({
                     user={user}
                     errors={errors}
                     handleRegisterRequest={handleRegisterRequest}
+                    handleClearErrors={handleClearErrors}
                 />
             </Route>
             <Route path="/personal">
@@ -74,6 +78,7 @@ const App = ({
                     messageWasSent={messageWasSent}
                     handleStartPasswordRecoveryRequest={handleStartPasswordRecoveryRequest}
                     handleEndPasswordRecoveryRequest={handleEndPasswordRecoveryRequest}
+                    handleClearErrors={handleClearErrors}
                 />
             </Route>
         </Switch>
@@ -93,7 +98,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleSetToken: (data) => dispatch(setToken(data)),
     handleStartPasswordRecoveryRequest: (data) => dispatch(startPasswordRecoveryRequest(data)),
     handleEndPasswordRecoveryRequest: (data) => dispatch(endPasswordRecoveryRequest(data)),
-    handleLogout: () => dispatch(logout())
+    handleLogout: () => dispatch(logout()),
+    handleClearErrors: () => dispatch(clearErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

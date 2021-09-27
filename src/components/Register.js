@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
+import './Register.scss';
 
-export const Register = ({user, errors, handleRegisterRequest}) => {
+export const Register = ({user, errors, handleRegisterRequest, handleClearErrors}) => {
 
     const initialData = {
         phone: '',
@@ -17,10 +18,15 @@ export const Register = ({user, errors, handleRegisterRequest}) => {
         handleRegisterRequest(data);
     }
 
+    useEffect(() => {
+        handleClearErrors();
+    }, [])
+
     if (!user) {
         return (
-            <div>
-                <form onSubmit={onSubmit}>
+            <div className="register">
+                <h2>Регистрация</h2>
+                <form className="register__form" onSubmit={onSubmit}>
                     <label>
                         <span>Телефон</span>
                         <input
@@ -58,11 +64,11 @@ export const Register = ({user, errors, handleRegisterRequest}) => {
                         />
                     </label>
                     {errors.length !== 0 && errors.map((error, i) => (
-                        <p key={error.param + i}>{error.msg}</p>
+                        <p className="register_error" key={error.param + i}>{error.msg}</p>
                     ))}
                     <button>Зарегистрироваться</button>
+                    <Link to="/login">Авторизация</Link>
                 </form>
-                <Link to="/login">Авторизация</Link>
             </div>
         );
     } else {

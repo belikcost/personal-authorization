@@ -1,0 +1,22 @@
+@import "/src/styles/mixins";
+
+.register {
+  @include container;
+  margin-top: 3rem;
+
+  h2 {
+    text-align: center;
+  }
+
+  &__form {
+    @include form;
+
+    a {
+      align-self: flex-start;
+    }
+  }
+
+  &_error {
+    @include error;
+  }
+}

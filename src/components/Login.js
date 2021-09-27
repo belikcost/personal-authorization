@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
+import './Login.scss';
 
-export const Login = ({user, errors, handleLoginRequest}) => {
+
+export const Login = ({user, errors, handleLoginRequest, handleClearErrors}) => {
     const initialData = {
         phone: '',
         password: '',
@@ -15,10 +17,15 @@ export const Login = ({user, errors, handleLoginRequest}) => {
         handleLoginRequest(data);
     }
 
+    useEffect(() => {
+        handleClearErrors();
+    }, [])
+
     if (!user) {
         return (
-            <div>
-                <form onSubmit={onSubmit}>
+            <div className="login">
+                <h2>Авторизация</h2>
+                <form className="login__form" onSubmit={onSubmit}>
                     <label>
                         <span>Телефон</span>
                         <input
@@ -37,21 +44,23 @@ export const Login = ({user, errors, handleLoginRequest}) => {
                             required
                         />
                     </label>
-                    <label>
+                    <div>
                         <span>Запомнить меня?</span>
                         <input
                             type="checkbox"
                             checked={data.remember}
                             onChange={(e) => setData({...data, remember: e.target.checked})}
                         />
-                    </label>
+                    </div>
                     {errors.length !== 0 && errors.map((error, i) => (
-                        <p key={error.param + i}>{error.msg}</p>
+                        <p className="login_error" key={error.param + i}>{error.msg}</p>
                     ))}
                     <button>Войти</button>
+                    <div>
+                        <Link to="/register">Регистрация</Link>
+                        <Link to="/password-recovery">Забыли пароль?</Link>
+                    </div>
                 </form>
-                <Link to="/register">Регистрация</Link>
-                <Link to="/password-recovery">Забыли пароль?</Link>
             </div>
         );
     } else {

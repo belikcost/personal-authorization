@@ -1,0 +1,18 @@
+@import "/src/styles/mixins";
+
+.login {
+  @include container;
+  margin-top: 3rem;
+
+  h2 {
+    text-align: center;
+  }
+
+  &__form {
+    @include form;
+  }
+
+  &_error {
+    @include error;
+  }
+}

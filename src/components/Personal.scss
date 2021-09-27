@@ -1,0 +1,15 @@
+@import "/src/styles/mixins";
+
+.personal {
+  @include container;
+
+  h2 {
+    text-align: center;
+  }
+
+  &__logout {
+    @include link;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

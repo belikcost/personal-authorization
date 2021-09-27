@@ -1,4 +1,5 @@
 import {
+    CLEAR_ERRORS,
     END_PASSWORD_RECOVERY_FAIL,
     END_PASSWORD_RECOVERY_SUCCESS,
     GET_USER_SUCCESS,
@@ -24,6 +25,7 @@ export const reducer = (state = initialState, action) => {
         case REGISTER_REQUEST:
         case LOGIN_REQUEST:
         case START_PASSWORD_RECOVERY_REQUEST:
+        case CLEAR_ERRORS:
             return {...state, errors: []};
         case REGISTER_FAIL:
         case LOGIN_FAIL:

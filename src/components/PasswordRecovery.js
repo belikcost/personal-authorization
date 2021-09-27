@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
+import './PasswordRecovery.scss';
+
 
 export const PasswordRecovery = ({
                                      user,
                                      errors,
                                      messageWasSent,
                                      handleStartPasswordRecoveryRequest,
-                                     handleEndPasswordRecoveryRequest
+                                     handleEndPasswordRecoveryRequest,
+                                     handleClearErrors
                                  }) => {
     const initialData = {
         phone: '',
@@ -28,19 +31,24 @@ export const PasswordRecovery = ({
         }
     }
 
+    const onChange = (name, value) => setData({...data, [name]: value});
+
     useEffect(() => {
         if (messageWasSent || errors.length !== 0) {
             setIsLoading(false);
         }
     }, [messageWasSent, errors]);
 
-    const onChange = (name, value) => setData({...data, [name]: value});
+    useEffect(() => {
+        handleClearErrors();
+    }, [])
 
     if (!user) {
         return (
-            <div>
+            <div className="password-recovery">
+                <h2>Восстановление пароля</h2>
                 {!isLoading ? (
-                    <form onSubmit={onSubmit}>
+                    <form className="password-recovery__form" onSubmit={onSubmit}>
                         {messageWasSent ? (
                             <>
                                 <label>
@@ -74,16 +82,17 @@ export const PasswordRecovery = ({
                             </label>
                         )}
                         {errors.length !== 0 && errors.map((error, i) => (
-                            <p key={error.param + i}>{error.msg}</p>
+                            <p className="password-recovery_error" key={error.param + i}>{error.msg}</p>
                         ))}
                         <button>Отправить</button>
+                        <div>
+                            <Link to="/login">Вспомнил пароль!</Link>
+                            <Link to="/register">Регистрация</Link>
+                        </div>
                     </form>
                 ) : (
-                    <p>Загрузка...</p>
+                    <p className="password-recovery__loading">Загрузка...</p>
                 )}
-
-                <Link to="/login">Вспомнил пароль!</Link>
-                <Link to="/register">Регистрация</Link>
             </div>
         );
     } else {
